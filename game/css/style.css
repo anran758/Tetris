@@ -1,0 +1,65 @@
+.square {
+  width: 400px;
+  height: 600px;
+  float: left
+}
+
+.title {
+  font-size: 30px;
+  margin: 20px auto;
+}
+
+.game {
+  position: relative;
+  float: left;
+  width: 200px;
+  height: 400px;
+  background-color: #f2faff;
+  border-left: 1px solid blue;
+  border-right: 1px solid blue;
+  border-bottom: 1px solid blue;
+}
+
+.next {
+  position: relative;
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin-left: 40px;
+  border: 1px solid blue;
+  background-color: #f2faff;
+}
+
+.info {
+  float: left;
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+.none,
+.current,
+.done {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.none {
+  background-color: #f2faff;
+}
+
+.current {
+  border: 1px solid red;
+  background-color: pink;
+}
+
+.done {
+  border: 1px solid black;
+  background-color: gray;
+}
+
+button {
+  display: block;
+  margin-top: 2px
+}

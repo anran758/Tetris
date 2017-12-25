@@ -11,6 +11,7 @@
 
 <body>
   <div>请用方向键和空格键进行操作: 上->旋转, 左->左移, 右->右移, , 下->下移, 空格->坠落</div>
+  <div id="waiting"></div>
   <div class="square" id="local">
     <div class="title">我的游戏区域</div>
     <div class="game" id="local_game"></div>
@@ -34,20 +35,9 @@
       <div>已得分:
         <span id="remote_score">0</span>分</div>
       <div id="remote_gameover"></div>
-      <button id="left">left</button>
-      <button id="down">down</button>
-      <button id="right">right</button>
-      <button id="rotate">rotate</button>
-      <button id="fixed">fixed</button>
-      <button id="performNext">performNext</button>
-      <button id="checkClear">checkClear</button>
-      <button id="setTime">setTime</button>
-      <button id="addScore">addScore</button>
-      <button id="gameOver">gameOver</button>
-      <button id="checkGameOver">checkGameOver</button>
-      <button id="addTailLines">addTailLines</button>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
   <script src="./js/square.js"></script>
   <script src="./js/squareFactory.js"></script>
   <script src="./js/game.js"></script>

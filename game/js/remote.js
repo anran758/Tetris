@@ -1,53 +1,59 @@
-var Remote = function() {
+/**
+ * 对方游戏的构建函数
+ * @constructor
+ * @param {*} socket
+ */
+var Remote = function(socket) {
   var game;
 
   // 获取DOM ID
-  var $ = function (id) {
-    return document.getElementById(id)
-  }
-/**
- * 绑定按钮事件
- * 
- */
-var bindEvents = function () {
-    $('down').onclick = function () {
-      game.down()
-    }
-    $('left').onclick = function () {
-      game.left()
-    }
-    $('right').onclick = function () {
-      game.right()
-    }
-    $('rotate').onclick = function () {
-      game.rotate()
-    }
-    $('fixed').onclick = function () {
-      game.fixed()
-    }
-    $('performNext').onclick = function () {
-      game.performNext(2, 2)
-    }
-    $('checkClear').onclick = function () {
-      game.checkClear()
-    }
-    $('setTime').onclick = function () {
-      game.setTime(20)
-    }
-    $('addScore').onclick = function () {
-      game.addScore(4)
-    }
-    $('gameOver').onclick = function () {
-      game.gameOver(true)
-    }
-    $('checkGameOver').onclick = function () {
-      game.checkGameOver()
-    }
-    $('addTailLines').onclick = function () {
-      game.addTailLines([0, 1, 0, 1, 0, 1, 0, 1, 0, 1])
-    }
-  }
-  
+  var $ = function(id) {
+    return document.getElementById(id);
+  };
+  /**
+   * 绑定按钮事件
+   *
+   */
+  var bindEvents = function() {
+    socket.on("init", function(data) {
+      start(data.type, data.dir);
+    });
+    socket.on("next", function(data) {
+      game.performNext(data.type, data.dir);
+    });
+    socket.on("rotate", function(data) {
+      game.rotate();
+    });
+    socket.on("left", function(data) {
+      game.left();
+    });
+    socket.on("right", function(data) {
+      game.right();
+    });
+    socket.on("down", function(data) {
+      game.down();
+    });
+    socket.on("fall", function(data) {
+      game.fall();
+    });
+    socket.on("fixed", function(data) {
+      game.fixed();
+    });
+    socket.on("time", function(data) {
+      game.setTime(data);
+    });
+    socket.on("lose", function(data) {
+      game.gameOver(false);
+    });
+    socket.on("line", function(data) {
+      game.checkClear();
+      game.addScore(data);
+    });
+    socket.on("addTailLines", function(data) {
+      game.addTailLines(data);
+    });
+  };
+
   var start = function(type, dir) {
     var doms = {
       gameDiv: $("remote_game"),
@@ -61,9 +67,5 @@ var bindEvents = function () {
     game.init(doms, type, dir);
   };
 
-  /**
-   * 导出API
-   */
-  this.start = start;
-  this.bindEvents = bindEvents
+  bindEvents();
 };
